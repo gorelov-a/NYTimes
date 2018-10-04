@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_photo_description">Фото автора</string>
+    <string name="author_name">Горелов Антон</string>
+    <string name="age">Возраст: 26</string>
+    <string name="icon_description">Иконка</string>
+    <string name="profession">Android разработчик</string>
+    <string name="about_author">Антон разрабатывает под Android с 2017 года. Сейчас он является Android разработчиков в компании Gramant.</string>
+    <string name="edit_text_hint">Введите сообщение…</string>
+    <string name="send_message_button_text">Отправить сообщение</string>
+    <string name="telegram_icon_description">Перейти в telegram чат с автором</string>
+</resources>
