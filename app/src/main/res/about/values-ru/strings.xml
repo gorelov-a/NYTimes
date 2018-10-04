@@ -9,4 +9,10 @@
     <string name="edit_text_hint">Введите сообщение…</string>
     <string name="send_message_button_text">Отправить сообщение</string>
     <string name="telegram_icon_description">Перейти в telegram чат с автором</string>
+    <string name="vk_icon_description">Перейти на страницу VK с автором</string>
+    <string name="whatsapp_icon_description">Перейти в whats app чат с автором</string>
+    <string name="empty_message">Ваше сообщение пусто.</string>
+    <string name="no_email_client_error">Вам нужен почтовый клиент для отправки сообщения</string>
+    <string name="no_browser_error">Вам нужен браузер что бы открыть ссылку</string>
+    <string name="disclaimer">%1$d Горелов Антон</string>
 </resources>

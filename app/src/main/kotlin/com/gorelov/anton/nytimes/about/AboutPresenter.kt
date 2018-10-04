@@ -1,21 +1,25 @@
 package com.gorelov.anton.nytimes.about
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import java.util.*
 
 @InjectViewState
 class AboutPresenter : MvpPresenter<AboutView>() {
 
-    fun onTelegramButtonClick() {
-        Log.d("AboutPresenter", "onTelegramButtonClick()")
-    }
+    fun onTelegramButtonClick() = viewState.openTelegramChat()
 
-    fun onVkButtonClick() {
+    fun onVkButtonClick() = viewState.openVKPage()
 
-    }
+    fun onWhatsAppButtonClick() = viewState.openWhatsAppChat()
 
     fun onEmailSendButtonClick(message: String) {
-
+        if (message.isBlank()) {
+            viewState.showEmptyMessageToast()
+        } else {
+            viewState.checkAndOpenMail(message)
+        }
     }
+
+    fun getCurrentYear(): Int = Calendar.getInstance().get(Calendar.YEAR)
 }
