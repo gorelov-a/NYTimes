@@ -1,18 +1,23 @@
 package com.gorelov.anton.nytimes.about
 
+import android.content.Intent
 import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 interface AboutView : MvpView {
 
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showEmptyMessageToast()
 
-    fun checkAndOpenMail(message: String)
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun showNoEmailClientToast()
 
-    fun openTelegramChat()
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun showNoBrowserToast()
 
-    fun openVKPage()
-
-    fun openWhatsAppChat()
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun startActivity(intent: Intent)
 
     fun setDisclaimer(text: String)
 
