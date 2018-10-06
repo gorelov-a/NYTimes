@@ -5,7 +5,7 @@
     <string name="age">Age: 26</string>
     <string name="icon_description">icon</string>
     <string name="profession">Android Developer</string>
-    <string name="about_author">Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant.</string>
+    <string name="about_author">Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant. Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant.</string>
     <string name="edit_text_hint">Input a message…</string>
     <string name="send_message_button_text">Send message</string>
     <string name="telegram_icon_description">Go to telegram chat with author</string>

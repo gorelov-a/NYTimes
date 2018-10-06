@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.arellomobile.mvp.presenter.ProvidePresenterTag
 import com.gorelov.anton.nytimes.R
@@ -15,13 +14,13 @@ import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : MvpAppCompatActivity(), AboutView {
 
-    @InjectPresenter(type = PresenterType.GLOBAL)
+    @InjectPresenter
     lateinit var aboutPresenter: AboutPresenter
 
-    @ProvidePresenterTag(presenterClass = AboutPresenter::class, type = PresenterType.GLOBAL)
+    @ProvidePresenterTag(presenterClass = AboutPresenter::class)
     fun provideDialogPresenterTag(): String = "AboutPresenter"
 
-    @ProvidePresenter(type = PresenterType.GLOBAL)
+    @ProvidePresenter
     fun provideAboutPresenter(): AboutPresenter = AboutPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
