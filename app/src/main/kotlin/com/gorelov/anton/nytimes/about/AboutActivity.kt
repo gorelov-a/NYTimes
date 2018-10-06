@@ -9,11 +9,16 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.arellomobile.mvp.presenter.ProvidePresenterTag
 import com.gorelov.anton.nytimes.R
+import com.gorelov.anton.nytimes.di.DI
 import kotlinx.android.synthetic.main.activity_about.*
+import javax.inject.Inject
 
 
 class AboutActivity : MvpAppCompatActivity(), AboutView {
 
+    private val scope by lazy { DI.openAboutScope() }
+
+    @Inject
     @InjectPresenter
     lateinit var aboutPresenter: AboutPresenter
 
@@ -21,12 +26,11 @@ class AboutActivity : MvpAppCompatActivity(), AboutView {
     fun provideDialogPresenterTag(): String = "AboutPresenter"
 
     @ProvidePresenter
-    fun provideAboutPresenter(): AboutPresenter = AboutPresenter()
+    fun provideAboutPresenter(): AboutPresenter = scope.getInstance(AboutPresenter::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        initView()
 
         with(aboutPresenter) {
             send_message_button.setOnClickListener { onEmailSendButtonClick(message_input.text.toString()) }
@@ -34,10 +38,6 @@ class AboutActivity : MvpAppCompatActivity(), AboutView {
             icon_vk.setOnClickListener { onVkButtonClick() }
             icon_whatsapp.setOnClickListener { onWhatsAppButtonClick() }
         }
-    }
-
-    private fun initView() {
-        disclaimer.text = String.format(getString(R.string.disclaimer), aboutPresenter.getCurrentYear())
     }
 
     override fun showEmptyMessageToast() = Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show()
@@ -58,6 +58,10 @@ class AboutActivity : MvpAppCompatActivity(), AboutView {
     override fun openVKPage() = openUri(AboutConsts.vkUrl)
 
     override fun openWhatsAppChat() = openUri(AboutConsts.whatsAppUrl)
+
+    override fun setDisclaimer(text: String) {
+        disclaimer.text = text
+    }
 
     private fun openUri(uri: String) {
         with(Intent(Intent.ACTION_VIEW, Uri.parse(uri))) {

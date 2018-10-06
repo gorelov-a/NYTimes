@@ -14,4 +14,6 @@ interface AboutView : MvpView {
 
     fun openWhatsAppChat()
 
+    fun setDisclaimer(text: String)
+
 }
