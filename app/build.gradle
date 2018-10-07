@@ -13,11 +13,22 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ toothpick_registry_package_name : 'com.gorelov.anton.nytimes' ]
+            }
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
         }
     }
     sourceSets {
@@ -29,6 +40,7 @@ android {
         }
         main.java.srcDirs = ['src/main/kotlin']
     }
+    buildToolsVersion '28.0.2'
 }
 
 kapt {

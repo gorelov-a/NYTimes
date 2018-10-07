@@ -5,6 +5,8 @@ import com.gorelov.anton.nytimes.BuildConfig
 import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
+import toothpick.registries.FactoryRegistryLocator
+import toothpick.registries.MemberInjectorRegistryLocator
 
 object DI {
 
@@ -16,6 +18,8 @@ object DI {
             Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
         } else {
             Toothpick.setConfiguration(Configuration.forProduction().disableReflection());
+            MemberInjectorRegistryLocator.setRootRegistry(com.gorelov.anton.nytimes.MemberInjectorRegistry())
+            FactoryRegistryLocator.setRootRegistry(com.gorelov.anton.nytimes.FactoryRegistry())
         }
 
         Toothpick.openScopes(APP_SCOPE).apply {
