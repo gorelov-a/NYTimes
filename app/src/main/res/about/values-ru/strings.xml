@@ -2,7 +2,6 @@
 <resources>
     <string name="about_photo_description">Фото автора</string>
     <string name="author_name">Горелов Антон</string>
-    <string name="age">Возраст: 26</string>
     <string name="icon_description">Иконка</string>
     <string name="profession">Android разработчик</string>
     <string name="about_author">Антон разрабатывает под Android с 2017 года. Сейчас он является Android разработчиков в компании Gramant.</string>

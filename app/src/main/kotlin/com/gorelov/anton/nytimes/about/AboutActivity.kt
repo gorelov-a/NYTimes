@@ -6,11 +6,9 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.arellomobile.mvp.presenter.ProvidePresenterTag
 import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.di.DI
 import kotlinx.android.synthetic.main.activity_about.*
-import javax.inject.Inject
 
 
 class AboutActivity : MvpAppCompatActivity(), AboutView {
@@ -18,12 +16,8 @@ class AboutActivity : MvpAppCompatActivity(), AboutView {
 
     private val scope by lazy { DI.openAboutScope() }
 
-    @Inject
     @InjectPresenter
     lateinit var aboutPresenter: AboutPresenter
-
-    @ProvidePresenterTag(presenterClass = AboutPresenter::class)
-    fun provideDialogPresenterTag(): String = "AboutPresenter"
 
     @ProvidePresenter
     fun provideAboutPresenter(): AboutPresenter = scope.getInstance(AboutPresenter::class.java)

@@ -2,7 +2,6 @@
 <resources>
     <string name="about_photo_description">Author photo</string>
     <string name="author_name">Gorelov Anton</string>
-    <string name="age">Age: 26</string>
     <string name="icon_description">icon</string>
     <string name="profession">Android Developer</string>
     <string name="about_author">Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant. Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant.</string>
