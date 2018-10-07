@@ -10,8 +10,8 @@ import toothpick.registries.MemberInjectorRegistryLocator
 
 object DI {
 
-    private val APP_SCOPE = "app_scope"
-    private val ABOUT_SCOPE = "about_scope"
+    private const val APP_SCOPE = "app_scope"
+    private const val ABOUT_SCOPE = "about_scope"
 
     fun init(applicationContext: Context) {
         if (BuildConfig.DEBUG) {
