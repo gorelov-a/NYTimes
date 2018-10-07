@@ -3,7 +3,6 @@ package com.gorelov.anton.nytimes.news
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -13,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.about.AboutActivity
+import com.gorelov.anton.nytimes.common.SpacesItemDecoration
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.news.model.NewsItem
 import kotlinx.android.synthetic.main.activity_news_list.*
@@ -28,20 +28,10 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
     @ProvidePresenter
     fun provideNewsListPresenter(): NewsListPresenter = scope.getInstance(NewsListPresenter::class.java)
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
-
-
-        news_list.adapter = NewsListAdapter(this, newsListPresenter.getNewList(), object : NewsListAdapter.OnItemClickListener {
-            override fun onItemClick(newsItem: NewsItem) {
-
-            }
-        })
-        when {
-            resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT -> news_list.layoutManager = LinearLayoutManager(this)
-            else -> news_list.layoutManager = GridLayoutManager(this, NewsListConsts.landscapeNewsColumnsCount)
-        }
+        initNewsList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,6 +47,20 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun initNewsList() {
+        news_list.adapter = NewsListAdapter(this, newsListPresenter.getNewList(), object : NewsListAdapter.OnItemClickListener {
+            override fun onItemClick(newsItem: NewsItem) {
+
+            }
+        })
+        val layoutManager = LinearLayoutManager(this)
+        when {
+            resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT -> news_list.layoutManager = layoutManager
+            else -> news_list.layoutManager = GridLayoutManager(this, NewsListConsts.landscapeNewsColumnsCount)
+        }
+        news_list.addItemDecoration(SpacesItemDecoration(this, R.dimen.news_card_between_space))
     }
 
 }

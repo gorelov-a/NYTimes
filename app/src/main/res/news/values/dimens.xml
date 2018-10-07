@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="news_card_space">5dp</dimen>
+    <dimen name="news_card_inner_space">5dp</dimen>
     <dimen name="news_card_image_size">100dp</dimen>
     <dimen name="news_card_big_text_size">16sp</dimen>
     <dimen name="news_card_normal_text_size">14sp</dimen>
     <dimen name="news_card_small_text_size">12sp</dimen>
+    <dimen name="news_card_between_space">4dp</dimen>
 </resources>

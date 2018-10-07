@@ -5,6 +5,14 @@ apply plugin: 'kotlin-android-extensions'
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('/Users/anton/Key Store NY Times')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.gorelov.anton.nytimes"

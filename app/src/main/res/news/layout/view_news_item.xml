@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="@dimen/news_card_space">
+    card_view:cardCornerRadius="@dimen/news_card_inner_space">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/news_card_space">
+        android:padding="@dimen/news_card_inner_space">
 
         <TextView
             android:id="@+id/category"
@@ -18,7 +18,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:maxLines="@integer/news_card_category_max_lines"
-            android:padding="@dimen/news_card_space"
+            android:padding="@dimen/news_card_inner_space"
             android:textAllCaps="true"
             android:textSize="@dimen/news_card_big_text_size"
             tools:text="darwin award" />
@@ -29,7 +29,7 @@
             android:layout_height="@dimen/news_card_image_size"
             android:layout_below="@id/category"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/news_card_space"
+            android:layout_margin="@dimen/news_card_inner_space"
             android:contentDescription="@string/news_card_image_desription"
             tools:src="@tools:sample/avatars" />
 
@@ -41,7 +41,7 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@id/heading_image"
             android:maxLines="@integer/news_card_title_max_lines"
-            android:padding="@dimen/news_card_space"
+            android:padding="@dimen/news_card_inner_space"
             android:textSize="@dimen/news_card_big_text_size"
             android:textStyle="bold"
             tools:text="Tourist filmed sitting on 5m-long crocodile" />
@@ -54,7 +54,7 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@id/heading_image"
             android:maxLines="@integer/news_card_preview_text_max_lines"
-            android:padding="@dimen/news_card_space"
+            android:padding="@dimen/news_card_inner_space"
             android:textSize="@dimen/news_card_normal_text_size"
             tools:text="It was dangerous, I know. It is a scary feeling sitting on something that could kill you in a fraction of a second, he says." />
 
@@ -65,7 +65,7 @@
             android:layout_below="@id/preview_text"
             android:layout_alignParentStart="true"
             android:maxLines="@integer/news_card_date_max_lines"
-            android:padding="@dimen/news_card_space"
+            android:padding="@dimen/news_card_inner_space"
             android:textSize="@dimen/news_card_small_text_size"
             tools:text="4 hr. ago, 10:34 AM" />
 
