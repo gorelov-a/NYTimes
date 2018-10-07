@@ -45,7 +45,7 @@ class NewsListAdapter(context: Context, private val news: List<NewsItem>, privat
         init {
             itemView.setOnClickListener {
                 if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(news.get(adapterPosition))
+                    listener.onItemClick(news[adapterPosition])
                 }
             }
         }

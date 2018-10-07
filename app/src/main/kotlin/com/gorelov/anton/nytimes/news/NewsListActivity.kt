@@ -15,6 +15,7 @@ import com.gorelov.anton.nytimes.about.AboutActivity
 import com.gorelov.anton.nytimes.common.SpacesItemDecoration
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.news.model.NewsItem
+import com.gorelov.anton.nytimes.news_details.NewsDetailsActivity
 import kotlinx.android.synthetic.main.activity_news_list.*
 
 
@@ -52,7 +53,7 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
     private fun initNewsList() {
         news_list.adapter = NewsListAdapter(this, newsListPresenter.getNewList(), object : NewsListAdapter.OnItemClickListener {
             override fun onItemClick(newsItem: NewsItem) {
-
+                NewsDetailsActivity.start(this@NewsListActivity, newsItem.category.id)
             }
         })
         val layoutManager = LinearLayoutManager(this)
