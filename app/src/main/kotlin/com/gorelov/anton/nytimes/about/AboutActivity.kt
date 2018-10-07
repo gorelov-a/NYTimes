@@ -1,5 +1,7 @@
 package com.gorelov.anton.nytimes.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.widget.Toast
@@ -34,15 +36,35 @@ class AboutActivity : MvpAppCompatActivity(), AboutView {
         }
     }
 
-    override fun showEmptyMessageToast() = Toast.makeText(this, R.string.empty_message, Toast.LENGTH_LONG).show()
+    override fun checkAndOpenMail(message: String) {
+        with(Intent(Intent.ACTION_SENDTO)) {
+            data = Uri.parse("mailto:${AboutConsts.email}")
+            putExtra(Intent.EXTRA_TEXT, message)
+            when {
+                resolveActivity(packageManager) != null -> startActivity(this)
+                else -> aboutPresenter.onNoEmailClientError()
+            }
+        }
+    }
+
+    override fun openTelegramChat() = openUri(AboutConsts.telegramUrl)
+
+    override fun openVKPage() = openUri(AboutConsts.vkUrl)
+
+    override fun openWhatsAppChat() = openUri(AboutConsts.whatsAppUrl)
 
     override fun setDisclaimer(text: String) {
         disclaimer.text = text
     }
 
-    override fun showNoEmailClientToast() = showToast(R.string.no_email_client_error)
+    override fun showToast(@StringRes stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_LONG).show()
 
-    override fun showNoBrowserToast() = showToast(R.string.no_browser_error)
-
-    private fun showToast(@StringRes stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_LONG).show()
+    private fun openUri(uri: String) {
+        with(Intent(Intent.ACTION_VIEW, Uri.parse(uri))) {
+            when {
+                resolveActivity(packageManager) != null -> startActivity(this)
+                else -> aboutPresenter.onNoBrowserError()
+            }
+        }
+    }
 }

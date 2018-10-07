@@ -1,8 +1,5 @@
 package com.gorelov.anton.nytimes.about
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.gorelov.anton.nytimes.R
@@ -12,25 +9,25 @@ import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
-class AboutPresenter @Inject constructor(private val applicationContext: Context, private val resourcesProvider: ResourcesProvider) : MvpPresenter<AboutView>() {
+class AboutPresenter @Inject constructor(private val resourcesProvider: ResourcesProvider) : MvpPresenter<AboutView>() {
 
-    fun onTelegramButtonClick() = checkIntentAndStartActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AboutConsts.telegramUrl)), viewState::showNoBrowserToast)
+    fun onTelegramButtonClick() = viewState.openTelegramChat()
 
-    fun onVkButtonClick() = checkIntentAndStartActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AboutConsts.vkUrl)), viewState::showNoBrowserToast)
+    fun onVkButtonClick() = viewState.openVKPage()
 
-    fun onWhatsAppButtonClick() = checkIntentAndStartActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AboutConsts.whatsAppUrl)), viewState::showNoBrowserToast)
+    fun onWhatsAppButtonClick() = viewState.openWhatsAppChat()
 
     fun onEmailSendButtonClick(message: String) {
         if (message.isBlank()) {
-            viewState.showEmptyMessageToast()
+            viewState.showToast(R.string.empty_message)
         } else {
-            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:${AboutConsts.email}")
-                putExtra(Intent.EXTRA_TEXT, message)
-            }
-            checkIntentAndStartActivity(intent, viewState::showNoEmailClientToast)
+            viewState.checkAndOpenMail(message)
         }
     }
+
+    fun onNoBrowserError() = viewState.showToast(R.string.no_browser_error)
+
+    fun onNoEmailClientError() = viewState.showToast(R.string.no_email_client_error)
 
     override fun onFirstViewAttach() {
         viewState.setDisclaimer(resourcesProvider.getString(R.string.disclaimer, getCurrentYear()))
@@ -39,11 +36,6 @@ class AboutPresenter @Inject constructor(private val applicationContext: Context
     override fun onDestroy() {
         super.onDestroy()
         DI.closeAboutScope()
-    }
-
-    private fun checkIntentAndStartActivity(intent: Intent, error: () -> Unit) = when {
-        intent.resolveActivity(applicationContext.packageManager) != null -> viewState.startActivity(intent)
-        else -> error()
     }
 
     private fun getCurrentYear(): Int = Calendar.getInstance().get(Calendar.YEAR)
