@@ -2,10 +2,12 @@ package com.gorelov.anton.nytimes.news
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
@@ -13,60 +15,53 @@ import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.news.model.NewsItem
 
 
-class NewsListAdapter(context: Context, val news: List<NewsItem>, val clickListener: AdapterView.OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
+class NewsListAdapter(context: Context, private val news: List<NewsItem>, private val clickListener: OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private val imageLoader: RequestManager;
+    private val imageLoader: RequestManager = Glide.with(context).applyDefaultRequestOptions(RequestOptions().centerCrop());
 
-    init {
-        val imageOption = RequestOptions().centerCrop()
-        this.imageLoader = Glide.with(context).applyDefaultRequestOptions(imageOption)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(inflater.inflate(R.layout.view_news_item, parent, false), clickListener)
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val holder: ViewHolder
-        if (convertView == null) {
-            holder = onCreateViewHolder(parent)
-            holder.itemView.tag = holder
-        } else {
-            holder = convertView.tag as ViewHolder
-        }
+    override fun getItemCount(): Int = news.size
 
-        onBindViewHolder(holder, position)
-        return holder.itemView
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(news[position])
     }
 
-    private fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = news[position]
-
-        imageLoader.load(item.imageUrl).into(holder.headingImage)
-        holder.category.text = item.category.name
-        holder.title.text = item.title
-        holder.previewText.text = item.previewText
-
+    interface OnItemClickListener {
+        fun onItemClick(newsItem: NewsItem)
     }
 
-    private fun onCreateViewHolder(parent: ViewGroup?): ViewHolder {
-        return ViewHolder(inflater.inflate(R.layout.view_news_item, parent, false))
-    }
-
-    override fun getItem(position: Int): Any = news[position]
-
-    override fun getItemId(position: Int): Long = position.toLong()
-
-    override fun getCount(): Int = news.size
-
-    class ViewHolder constructor(val itemView: View, listener: View.OnClickListener) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, listener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
+        private val category: TextView = itemView.findViewById(R.id.category)
+        private val title: TextView = itemView.findViewById(R.id.title)
+        private val previewText: TextView = itemView.findViewById(R.id.preview_text)
+        private val date: TextView = itemView.findViewById(R.id.date)
+        private val headingImage: ImageView = itemView.findViewById(R.id.heading_image)
 
         init {
-            itemView.setOnClickListener(listener)
+            itemView.setOnClickListener {
+                if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(news.get(adapterPosition))
+                }
+            }
         }
 
-        fun bind(item: NewsItem) {
-            imageLoader.load(item.imageUrl).into(holder.headingImage)
-            category.text = item.category.name
-            title.text = item.title
-            previewText.text = item.previewText
+        fun bind(newsItem: NewsItem) {
+            imageLoader.load(newsItem.imageUrl).into(headingImage)
+            category.text = newsItem.category.name
+            title.text = newsItem.title
+            previewText.text = newsItem.previewText
+            date.text = DateUtils.getRelativeDateTimeString(
+                    date.context,
+                    newsItem.publishDate.time,
+                    DateUtils.MINUTE_IN_MILLIS,
+                    DateUtils.DAY_IN_MILLIS,
+                    DateUtils.FORMAT_SHOW_TIME
+            )
         }
     }
 }
