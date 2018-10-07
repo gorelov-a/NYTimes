@@ -36,7 +36,7 @@ android {
             res.srcDirs = [
                     'src/main/res/about',
                     'src/main/res/app',
-                    'src/main/res/NewsItem'
+                    'src/main/res/news'
             ]
         }
         main.java.srcDirs = ['src/main/kotlin']
