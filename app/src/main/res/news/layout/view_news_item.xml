@@ -12,7 +12,7 @@
         android:padding="@dimen/news_card_inner_space">
 
         <TextView
-            android:id="@+id/category"
+            android:id="@+id/news_list_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -25,22 +25,22 @@
             tools:text="darwin award" />
 
         <ImageView
-            android:id="@+id/heading_image"
+            android:id="@+id/news_list_heading_image"
             android:layout_width="@dimen/news_card_image_size"
             android:layout_height="@dimen/news_card_image_size"
-            android:layout_below="@id/category"
+            android:layout_below="@id/news_list_category"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/news_card_inner_space"
             android:contentDescription="@string/news_card_image_desription"
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/news_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/category"
+            android:layout_below="@id/news_list_category"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/heading_image"
+            android:layout_toStartOf="@id/news_list_heading_image"
             android:maxLines="@integer/news_card_title_max_lines"
             android:padding="@dimen/news_card_inner_space"
             android:textColor="@android:color/black"
@@ -49,12 +49,12 @@
             tools:text="Tourist filmed sitting on 5m-long crocodile" />
 
         <TextView
-            android:id="@+id/preview_text"
+            android:id="@+id/news_list_preview_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
+            android:layout_below="@id/news_list_title"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/heading_image"
+            android:layout_toStartOf="@id/news_list_heading_image"
             android:maxLines="@integer/news_card_preview_text_max_lines"
             android:padding="@dimen/news_card_inner_space"
             android:textColor="@android:color/black"
@@ -62,10 +62,10 @@
             tools:text="It was dangerous, I know. It is a scary feeling sitting on something that could kill you in a fraction of a second, he says." />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/news_list_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/preview_text"
+            android:layout_below="@id/news_list_preview_text"
             android:layout_alignParentStart="true"
             android:maxLines="@integer/news_card_date_max_lines"
             android:padding="@dimen/news_card_inner_space"

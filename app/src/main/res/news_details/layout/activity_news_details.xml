@@ -11,7 +11,7 @@
         tools:context=".news_details.NewsDetailsActivity">
 
         <ImageView
-            android:id="@+id/heading_image"
+            android:id="@+id/news_details_heading_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/heading_image_content_decription"
@@ -19,7 +19,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/news_details_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/inner_space"
@@ -31,14 +31,14 @@
             tools:text="Police warn daredevil cliff jumpers who are risking their lives for likes" />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/news_details_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/inner_space"
             tools:text="Yesterday, 12:45 PM" />
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/news_details_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/inner_space"

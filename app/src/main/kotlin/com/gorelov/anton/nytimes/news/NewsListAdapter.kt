@@ -36,11 +36,11 @@ class NewsListAdapter(context: Context, private val news: List<NewsItem>, privat
     }
 
     inner class ViewHolder(itemView: View, listener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
-        private val category: TextView = itemView.findViewById(R.id.category)
-        private val title: TextView = itemView.findViewById(R.id.title)
-        private val previewText: TextView = itemView.findViewById(R.id.preview_text)
-        private val date: TextView = itemView.findViewById(R.id.date)
-        private val headingImage: ImageView = itemView.findViewById(R.id.heading_image)
+        private val category: TextView = itemView.findViewById(R.id.news_list_category)
+        private val title: TextView = itemView.findViewById(R.id.news_list_title)
+        private val previewText: TextView = itemView.findViewById(R.id.news_list_preview_text)
+        private val date: TextView = itemView.findViewById(R.id.news_list_date)
+        private val headingImage: ImageView = itemView.findViewById(R.id.news_list_heading_image)
 
         init {
             itemView.setOnClickListener {
