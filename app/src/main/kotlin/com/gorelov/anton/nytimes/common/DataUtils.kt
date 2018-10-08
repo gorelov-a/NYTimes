@@ -1,7 +1,7 @@
 package com.gorelov.anton.nytimes.common
 
-import com.gorelov.anton.nytimes.news.model.Category
-import com.gorelov.anton.nytimes.news.model.NewsItem
+import com.gorelov.anton.nytimes.model.Category
+import com.gorelov.anton.nytimes.model.NewsItem
 import java.util.*
 
 

@@ -20,6 +20,7 @@
             android:maxLines="@integer/news_card_category_max_lines"
             android:padding="@dimen/news_card_inner_space"
             android:textAllCaps="true"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/news_card_big_text_size"
             tools:text="darwin award" />
 
@@ -42,6 +43,7 @@
             android:layout_toStartOf="@id/heading_image"
             android:maxLines="@integer/news_card_title_max_lines"
             android:padding="@dimen/news_card_inner_space"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/news_card_big_text_size"
             android:textStyle="bold"
             tools:text="Tourist filmed sitting on 5m-long crocodile" />
@@ -55,6 +57,7 @@
             android:layout_toStartOf="@id/heading_image"
             android:maxLines="@integer/news_card_preview_text_max_lines"
             android:padding="@dimen/news_card_inner_space"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/news_card_normal_text_size"
             tools:text="It was dangerous, I know. It is a scary feeling sitting on something that could kill you in a fraction of a second, he says." />
 

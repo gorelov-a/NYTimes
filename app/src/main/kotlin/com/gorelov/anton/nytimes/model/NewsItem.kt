@@ -1,4 +1,4 @@
-package com.gorelov.anton.nytimes.news.model
+package com.gorelov.anton.nytimes.model
 
 import java.util.*
 

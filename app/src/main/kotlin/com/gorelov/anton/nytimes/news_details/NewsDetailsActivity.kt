@@ -6,7 +6,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.gorelov.anton.nytimes.R
 
 
-class NewsDetailsActivity : MvpAppCompatActivity() {
+class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
 
     companion object {
         private val BUNDLE_KEY_NEWS_ID = "newsId"
@@ -17,8 +17,18 @@ class NewsDetailsActivity : MvpAppCompatActivity() {
         }
     }
 
+    override fun setActionBarTitle(title: String) {
+        supportActionBar?.apply {
+            setTitle(title)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_details)
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 }

@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".news_details.NewsDetailsActivity">
+    android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".news_details.NewsDetailsActivity">
+
+        <ImageView
+            android:id="@+id/heading_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/heading_image_content_decription"
+            android:scaleType="fitStart"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/inner_space"
+            android:layout_marginTop="@dimen/inner_space"
+            android:layout_marginEnd="@dimen/inner_space"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            tools:text="Police warn daredevil cliff jumpers who are risking their lives for likes" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/inner_space"
+            tools:text="Yesterday, 12:45 PM" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/inner_space"
+            android:textColor="@android:color/black"
+            tools:text="Daredevils attempting dangerous cliff dives in a quest for likes has led to an increase in costly helicopterairlifts in California, police say." />
+
+    </LinearLayout>
+</ScrollView>

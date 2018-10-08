@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.gorelov.anton.nytimes.R
-import com.gorelov.anton.nytimes.news.model.NewsItem
+import com.gorelov.anton.nytimes.model.NewsItem
 
 
 class NewsListAdapter(context: Context, private val news: List<NewsItem>, private val clickListener: OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {

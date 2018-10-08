@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menu_about_author_item">О авторе</string>
+    <string name="menu_about_author_item">Об авторе</string>
     <string name="news_card_image_desription">Изображение с новостью</string>
 </resources>

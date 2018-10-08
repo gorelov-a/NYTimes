@@ -14,7 +14,7 @@ import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.about.AboutActivity
 import com.gorelov.anton.nytimes.common.SpacesItemDecoration
 import com.gorelov.anton.nytimes.di.DI
-import com.gorelov.anton.nytimes.news.model.NewsItem
+import com.gorelov.anton.nytimes.model.NewsItem
 import com.gorelov.anton.nytimes.news_details.NewsDetailsActivity
 import kotlinx.android.synthetic.main.activity_news_list.*
 
