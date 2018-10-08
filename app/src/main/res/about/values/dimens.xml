@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="photo_size">150dp</dimen>
-    <dimen name="padding">4dp</dimen>
+    <dimen name="photo_size">200dp</dimen>
+    <dimen name="indent">8dp</dimen>
     <dimen name="big_text_size">26sp</dimen>
     <dimen name="normal_text_size">16sp</dimen>
     <dimen name="line_height">1dp</dimen>

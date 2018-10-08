@@ -2,11 +2,16 @@
 <resources>
     <string name="about_photo_description">Author photo</string>
     <string name="author_name">Gorelov Anton</string>
-    <string name="age">Age: 26</string>
     <string name="icon_description">icon</string>
     <string name="profession">Android Developer</string>
-    <string name="about_author">Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant.</string>
+    <string name="about_author">Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant. Anton has been doing Android developer since 2017. At the moment he is Android Developer at Gramant.</string>
     <string name="edit_text_hint">Input a message…</string>
     <string name="send_message_button_text">Send message</string>
     <string name="telegram_icon_description">Go to telegram chat with author</string>
+    <string name="vk_icon_description">Go to vk page with author</string>
+    <string name="whatsapp_icon_description">Go to whats app chat with author</string>
+    <string name="empty_message">Your message is empty.</string>
+    <string name="no_email_client_error">You need mail client to send message</string>
+    <string name="no_browser_error">You need browser to open url</string>
+    <string name="disclaimer">%1$d Gorelov Anton</string>
 </resources>
