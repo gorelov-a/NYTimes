@@ -44,6 +44,11 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     override fun showNewsItem(newsDetailsItemVM: NewsDetailsItemVM) {
         with(newsDetailsItemVM) {
             supportActionBar?.apply {
@@ -53,7 +58,7 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
             news_details_title.text = title
             news_details_content.text = content
             news_details_date.text = publishDate
-            Glide.with(this@NewsDetailsActivity).applyDefaultRequestOptions(RequestOptions().centerCrop()).load(imageUrl).into(news_details_heading_image)
+            Glide.with(this@NewsDetailsActivity).applyDefaultRequestOptions(RequestOptions().fitCenter()).load(imageUrl).into(news_details_heading_image)
         }
     }
 

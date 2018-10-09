@@ -17,7 +17,7 @@ import com.gorelov.anton.nytimes.news.vm.NewsListItemVM
 class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, private val clickListener: OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private val imageLoader: RequestManager = Glide.with(context).applyDefaultRequestOptions(RequestOptions().centerCrop());
+    private val imageLoader: RequestManager = Glide.with(context).applyDefaultRequestOptions(RequestOptions().fitCenter());
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
