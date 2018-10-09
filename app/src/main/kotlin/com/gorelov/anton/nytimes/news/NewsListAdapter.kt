@@ -2,7 +2,6 @@ package com.gorelov.anton.nytimes.news
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.gorelov.anton.nytimes.R
-import com.gorelov.anton.nytimes.model.NewsItem
+import com.gorelov.anton.nytimes.news.vm.NewsListItemVM
 
 
-class NewsListAdapter(context: Context, private val news: List<NewsItem>, private val clickListener: OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
+class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, private val clickListener: OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private val imageLoader: RequestManager = Glide.with(context).applyDefaultRequestOptions(RequestOptions().centerCrop());
@@ -32,7 +31,7 @@ class NewsListAdapter(context: Context, private val news: List<NewsItem>, privat
     }
 
     interface OnItemClickListener {
-        fun onItemClick(newsItem: NewsItem)
+        fun onItemClick(newsItem: NewsListItemVM)
     }
 
     inner class ViewHolder(itemView: View, listener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
@@ -50,18 +49,12 @@ class NewsListAdapter(context: Context, private val news: List<NewsItem>, privat
             }
         }
 
-        fun bind(newsItem: NewsItem) {
+        fun bind(newsItem: NewsListItemVM) {
             imageLoader.load(newsItem.imageUrl).into(headingImage)
-            category.text = newsItem.category.name
+            category.text = newsItem.category
             title.text = newsItem.title
             previewText.text = newsItem.previewText
-            date.text = DateUtils.getRelativeDateTimeString(
-                    date.context,
-                    newsItem.publishDate.time,
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.DAY_IN_MILLIS,
-                    DateUtils.FORMAT_SHOW_TIME
-            )
+            date.text = newsItem.publishDate
         }
     }
 }

@@ -14,7 +14,7 @@ import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.about.AboutActivity
 import com.gorelov.anton.nytimes.common.SpacesItemDecoration
 import com.gorelov.anton.nytimes.di.DI
-import com.gorelov.anton.nytimes.model.NewsItem
+import com.gorelov.anton.nytimes.news.vm.NewsListItemVM
 import com.gorelov.anton.nytimes.news_details.NewsDetailsActivity
 import kotlinx.android.synthetic.main.activity_news_list.*
 
@@ -32,7 +32,6 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
-        initNewsList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,10 +49,10 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
         }
     }
 
-    private fun initNewsList() {
-        news_list.adapter = NewsListAdapter(this, newsListPresenter.getNewList(), object : NewsListAdapter.OnItemClickListener {
-            override fun onItemClick(newsItem: NewsItem) {
-                NewsDetailsActivity.start(this@NewsListActivity, newsItem.category.id)
+    override fun showNews(news: List<NewsListItemVM>) {
+        news_list.adapter = NewsListAdapter(this, news, object : NewsListAdapter.OnItemClickListener {
+            override fun onItemClick(newsItem: NewsListItemVM) {
+                NewsDetailsActivity.start(this@NewsListActivity, newsItem.id)
             }
         })
         val layoutManager = LinearLayoutManager(this)

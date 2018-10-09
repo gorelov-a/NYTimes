@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.model.NewsItemId
-import com.gorelov.anton.nytimes.news_details.vm.NewsItemVM
+import com.gorelov.anton.nytimes.news_details.vm.NewsDetailsItemVM
 import kotlinx.android.synthetic.main.activity_news_details.*
 
 
@@ -44,8 +44,8 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
         }
     }
 
-    override fun showNewsItem(newsItemVM: NewsItemVM) {
-        with(newsItemVM) {
+    override fun showNewsItem(newsDetailsItemVM: NewsDetailsItemVM) {
+        with(newsDetailsItemVM) {
             supportActionBar?.apply {
                 title = category
             }

@@ -1,15 +1,17 @@
 package com.gorelov.anton.nytimes.news
 
+import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.gorelov.anton.nytimes.common.DataUtils
+import com.gorelov.anton.nytimes.common.DateUtils
 import com.gorelov.anton.nytimes.di.DI
-import com.gorelov.anton.nytimes.model.NewsItem
+import com.gorelov.anton.nytimes.news.vm.NewsListItemConverter
 import javax.inject.Inject
 
-class NewsListPresenter @Inject constructor() : MvpPresenter<NewsListView>() {
+@InjectViewState
+class NewsListPresenter @Inject constructor(private val newsListInteractor: NewsListInteractor, val dateUtils: DateUtils) : MvpPresenter<NewsListView>() {
 
-    fun getNewList(): List<NewsItem> {
-        return DataUtils().generateNews()
+    override fun onFirstViewAttach() {
+        viewState.showNews(NewsListItemConverter.from(newsListInteractor.getNewsList(), dateUtils))
     }
 
     override fun onDestroy() {

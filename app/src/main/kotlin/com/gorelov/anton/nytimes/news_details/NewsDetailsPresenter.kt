@@ -6,7 +6,7 @@ import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.common.DateUtils
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.model.NewsItemId
-import com.gorelov.anton.nytimes.news_details.vm.NewsItemConverter
+import com.gorelov.anton.nytimes.news_details.vm.NewsDetailsItemConverter
 import javax.inject.Inject
 
 @InjectViewState
@@ -20,7 +20,7 @@ class NewsDetailsPresenter @Inject constructor(
         val newsItem = interactor.getNewsItemById(newsId)
 
         if (newsItem != null) {
-            val newsItemVM = NewsItemConverter.from(newsItem, dateUtils)
+            val newsItemVM = NewsDetailsItemConverter.from(newsItem, dateUtils)
             viewState.showNewsItem(newsItemVM)
         } else {
             viewState.showToast(R.string.no_email_client_error)
