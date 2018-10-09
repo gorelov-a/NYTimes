@@ -2,10 +2,12 @@ package com.gorelov.anton.nytimes.common
 
 import com.gorelov.anton.nytimes.model.Category
 import com.gorelov.anton.nytimes.model.NewsItem
+import com.gorelov.anton.nytimes.model.NewsItemId
 import java.util.*
+import javax.inject.Inject
 
 
-class DataUtils {
+class DataUtils @Inject constructor() {
 
     fun generateNews(): List<NewsItem> {
         val darwinAwards = Category(1, "Darwin Awards")
@@ -15,6 +17,7 @@ class DataUtils {
 
         val news = ArrayList<NewsItem>()
         news.add(NewsItem(
+                NewsItemId(1),
                 "Tourist filmed sitting on 5m-long crocodile",
                 "https://e3.365dm.com/18/09/736x414/skynews-crocodile-australia_4433218.jpg",
                 darwinAwards,
@@ -33,6 +36,7 @@ class DataUtils {
                         + "Mr Jensen admitted he took life in his hands by sitting on a live crocodile for the first time."
         ))
         news.add(NewsItem(
+                NewsItemId(2),
                 "Police warn daredevil cliff jumpers who are 'risking their lives for likes'",
                 "https://e3.365dm.com/18/09/2048x1152/skynews-cliff-jumping-greg-milam_4433647.jpg",
                 criminal,
@@ -50,6 +54,7 @@ class DataUtils {
                         + "Hermit Falls.")
         ))
         news.add(NewsItem(
+                NewsItemId(3),
                 "Bear saved after getting his head stuck in milk can",
                 "https://e3.365dm.com/18/09/2048x1152/skynews-bear-minnesota_4419111.jpg",
                 animals,
@@ -66,6 +71,7 @@ class DataUtils {
                         + "After being released, the seemingly healthy bear ran off into the woods.")
         ))
         news.add(NewsItem(
+                NewsItemId(4),
                 "Nearly $18m of cocaine seized in donated boxes of bananas",
                 "https://e3.365dm.com/18/09/2048x1152/skynews-texas-bananas-drugs_4430760.jpg",
                 criminal,
@@ -85,6 +91,7 @@ class DataUtils {
                         + "US Customs arrived and tested the substance, which confirmed the powder was cocaine.")
         ))
         news.add(NewsItem(
+                NewsItemId(5),
                 "US government hacker jailed after losing secrets",
                 "https://e3.365dm.com/17/09/736x414/d55722dc4eb37f6959d2e047c14710d586aab99f90aa1e4acfd9f992125294f5_4107038.jpg",
                 criminal,
@@ -108,6 +115,7 @@ class DataUtils {
                         + "Kaspersky's anti-virus.")
         ))
         news.add(NewsItem(
+                NewsItemId(6),
                 "Wet Wet Wet announce Liberty X star Kevin Simm as new frontman",
                 "https://e3.365dm.com/18/09/2048x1152/skynews-wet-wet-wet-kevin-simm_4433314.jpg",
                 music,
@@ -127,6 +135,15 @@ class DataUtils {
         ))
 
         return news
+    }
+
+    fun getNewsItemById(id: NewsItemId): NewsItem? {
+        val news = generateNews()
+        for (curItem in news) {
+            if (curItem.id == id)
+                return curItem
+        }
+        return null
     }
 
     private fun createDate(year: Int, month: Int, date: Int, hrs: Int, min: Int): Date = GregorianCalendar(year, month - 1, date, hrs, min).time

@@ -2,6 +2,7 @@ package com.gorelov.anton.nytimes.di
 
 import android.content.Context
 import com.gorelov.anton.nytimes.BuildConfig
+import com.gorelov.anton.nytimes.model.NewsItemId
 import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
@@ -37,7 +38,7 @@ object DI {
 
     fun closeNewsListScope() = Toothpick.closeScope(NEWS_LIST_SCOPE)
 
-    fun openNewsDetailsScope(newsId: Int): Scope = Toothpick.openScopes(APP_SCOPE, NEWS_DETAILS_SCOPE).apply {
+    fun openNewsDetailsScope(newsId: NewsItemId): Scope = Toothpick.openScopes(APP_SCOPE, NEWS_DETAILS_SCOPE).apply {
         installModules(NewsDetailsModule(newsId))
     }
 

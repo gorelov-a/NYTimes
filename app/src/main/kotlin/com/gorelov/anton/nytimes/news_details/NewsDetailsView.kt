@@ -1,21 +1,15 @@
 package com.gorelov.anton.nytimes.news_details
 
-import android.graphics.drawable.Drawable
+import android.support.annotation.StringRes
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import com.gorelov.anton.nytimes.news_details.vm.NewsItemVM
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface NewsDetailsView : MvpView {
 
-    fun setActionBarCategory(category: String)
+    fun showNewsItem(newsItemVM: NewsItemVM)
 
-    fun setTitle(title: String)
-
-    fun setContent(content: String)
-
-    fun setDate(string: String)
-
-    fun setHeadingImage(drawable: Drawable)
-
+    fun showToast(@StringRes stringId: Int)
 }
