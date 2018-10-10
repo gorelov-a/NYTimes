@@ -3,7 +3,7 @@ package com.gorelov.anton.nytimes.news_details
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.gorelov.anton.nytimes.R
-import com.gorelov.anton.nytimes.common.DateUtils
+import com.gorelov.anton.nytimes.common.DateFormatter
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.model.NewsItemId
 import com.gorelov.anton.nytimes.news_details.vm.NewsDetailsItemConverter
@@ -13,14 +13,14 @@ import javax.inject.Inject
 class NewsDetailsPresenter @Inject constructor(
         private val newsId: NewsItemId,
         private val interactor: NewsDetailsInteractor,
-        private val dateUtils: DateUtils
+        private val dateFormatter: DateFormatter
 ) : MvpPresenter<NewsDetailsView>() {
 
     override fun onFirstViewAttach() {
         val newsItem = interactor.getNewsItemById(newsId)
 
         if (newsItem != null) {
-            val newsItemVM = NewsDetailsItemConverter.from(newsItem, dateUtils)
+            val newsItemVM = NewsDetailsItemConverter.from(newsItem, dateFormatter)
             viewState.showNewsItem(newsItemVM)
         } else {
             viewState.showToast(R.string.no_email_client_error)

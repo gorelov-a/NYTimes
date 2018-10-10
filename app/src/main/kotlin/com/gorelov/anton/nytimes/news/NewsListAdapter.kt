@@ -14,7 +14,7 @@ import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.news.vm.NewsListItemVM
 
 
-class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, private val clickListener: OnItemClickListener?) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
+class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, private val clickListener: (data: NewsListItemVM) -> Unit) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private val imageLoader: RequestManager = Glide.with(context).applyDefaultRequestOptions(RequestOptions().fitCenter());
@@ -30,11 +30,7 @@ class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, 
         holder.bind(news[position])
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(newsItem: NewsListItemVM)
-    }
-
-    inner class ViewHolder(itemView: View, listener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, listener: (data: NewsListItemVM) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val category: TextView = itemView.findViewById(R.id.news_list_category)
         private val title: TextView = itemView.findViewById(R.id.news_list_title)
         private val previewText: TextView = itemView.findViewById(R.id.news_list_preview_text)
@@ -43,8 +39,8 @@ class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, 
 
         init {
             itemView.setOnClickListener {
-                if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(news[adapterPosition])
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    listener.invoke(news[adapterPosition])
                 }
             }
         }

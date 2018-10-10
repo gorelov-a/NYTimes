@@ -1,18 +1,18 @@
 package com.gorelov.anton.nytimes.news.vm
 
-import com.gorelov.anton.nytimes.common.DateUtils
+import com.gorelov.anton.nytimes.common.DateFormatter
 import com.gorelov.anton.nytimes.model.NewsItem
 
 object NewsListItemConverter {
 
-    fun from(news: List<NewsItem>, dateUtils: DateUtils): List<NewsListItemVM> = news.mapTo(mutableListOf()) { from(it, dateUtils) }
+    fun from(news: List<NewsItem>, dateFormatter: DateFormatter): List<NewsListItemVM> = news.mapTo(mutableListOf()) { from(it, dateFormatter) }
 
-    fun from(news: NewsItem, dateUtils: DateUtils): NewsListItemVM = NewsListItemVM(
+    fun from(news: NewsItem, dateFormatter: DateFormatter): NewsListItemVM = NewsListItemVM(
             news.id.id,
             news.title,
             news.imageUrl,
             news.category.name,
-            dateUtils.format(news.publishDate),
+            dateFormatter.format(news.publishDate),
             news.previewText
     )
 }

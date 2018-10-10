@@ -50,14 +50,11 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
     }
 
     override fun showNews(news: List<NewsListItemVM>) {
-        news_list.adapter = NewsListAdapter(this, news, object : NewsListAdapter.OnItemClickListener {
-            override fun onItemClick(newsItem: NewsListItemVM) {
-                NewsDetailsActivity.start(this@NewsListActivity, newsItem.id)
-            }
-        })
-        val layoutManager = LinearLayoutManager(this)
+        news_list.adapter = NewsListAdapter(this, news) {
+            NewsDetailsActivity.start(this@NewsListActivity, it.id)
+        }
         when {
-            resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT -> news_list.layoutManager = layoutManager
+            resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT -> news_list.layoutManager = LinearLayoutManager(this)
             else -> news_list.layoutManager = GridLayoutManager(this, NewsListConsts.landscapeNewsColumnsCount)
         }
         news_list.addItemDecoration(SpacesItemDecoration(this, R.dimen.news_card_between_space))
