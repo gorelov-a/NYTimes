@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -58,6 +59,14 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
             else -> news_list.layoutManager = GridLayoutManager(this, NewsListConsts.landscapeNewsColumnsCount)
         }
         news_list.addItemDecoration(SpacesItemDecoration(this, R.dimen.news_card_between_space))
+    }
+
+    override fun showProgressBar() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progress_bar.visibility = View.GONE
     }
 
 }

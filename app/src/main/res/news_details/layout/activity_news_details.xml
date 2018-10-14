@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -14,6 +14,7 @@
             android:id="@+id/news_details_heading_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:contentDescription="@string/heading_image_content_decription"
             android:scaleType="fitStart"
             tools:src="@tools:sample/avatars" />
@@ -22,6 +23,7 @@
             android:id="@+id/news_details_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/news_details_heading_image"
             android:layout_marginStart="@dimen/inner_space"
             android:layout_marginTop="@dimen/inner_space"
             android:layout_marginEnd="@dimen/inner_space"
@@ -34,6 +36,7 @@
             android:id="@+id/news_details_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/news_details_title"
             android:layout_margin="@dimen/inner_space"
             tools:text="Yesterday, 12:45 PM" />
 
@@ -41,9 +44,16 @@
             android:id="@+id/news_details_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/news_details_date"
             android:padding="@dimen/inner_space"
             android:textColor="@android:color/black"
             tools:text="Daredevils attempting dangerous cliff dives in a quest for likes has led to an increase in costly helicopterairlifts in California, police say." />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 </ScrollView>

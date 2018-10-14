@@ -3,6 +3,7 @@ package com.gorelov.anton.nytimes.news_details
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -63,4 +64,12 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
     }
 
     override fun showToast(@StringRes stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_LONG).show()
+
+    override fun showProgressBar() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progress_bar.visibility = View.GONE
+    }
 }
