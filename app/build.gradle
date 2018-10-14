@@ -46,11 +46,12 @@ android {
                     'src/main/res/app',
                     'src/main/res/news',
                     'src/main/res/news_details',
+                    'src/main/res/homework4'
             ]
         }
         main.java.srcDirs = ['src/main/kotlin']
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 }
 
 kapt {

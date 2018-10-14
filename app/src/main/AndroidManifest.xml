@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".about.AboutActivity" />
         <activity android:name=".news_details.NewsDetailsActivity" />
+        <activity android:name=".homework4.MainActivity" />
     </application>
 
 </manifest>
