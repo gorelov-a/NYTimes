@@ -8,11 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.about.AboutActivity
+import com.gorelov.anton.nytimes.common.BaseActivity
 import com.gorelov.anton.nytimes.common.SpacesItemDecoration
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.news.vm.NewsListItemVM
@@ -20,7 +20,7 @@ import com.gorelov.anton.nytimes.news_details.NewsDetailsActivity
 import kotlinx.android.synthetic.main.activity_news_list.*
 
 
-class NewsListActivity : MvpAppCompatActivity(), NewsListView {
+class NewsListActivity : BaseActivity(), NewsListView {
 
     private val scope by lazy { DI.openNewsListScope() }
 
