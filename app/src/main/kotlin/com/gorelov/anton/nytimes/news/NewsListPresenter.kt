@@ -1,6 +1,7 @@
 package com.gorelov.anton.nytimes.news
 
 import com.arellomobile.mvp.InjectViewState
+import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.common.BasePresenter
 import com.gorelov.anton.nytimes.common.DateFormatter
 import com.gorelov.anton.nytimes.di.DI
@@ -15,14 +16,17 @@ class NewsListPresenter @Inject constructor(
 ) : BasePresenter<NewsListView>() {
 
     override fun onFirstViewAttach() {
-        viewState.showProgressBar()
+        viewState.changeProgressBarVisibility(true)
         disposable.add(newsListInteractor.getNewsList()
                 .map { NewsListItemConverter.from(it, dateFormatter) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    viewState.hideProgressBar()
+                .subscribe({
+                    viewState.changeProgressBarVisibility(false)
                     viewState.showNews(it)
-                })
+                }, {
+                    viewState.changeProgressBarVisibility(false)
+                    viewState.showToast(R.string.load_news_error)
+                }))
     }
 
     override fun onDestroy() {

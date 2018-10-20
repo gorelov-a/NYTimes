@@ -61,12 +61,9 @@ class NewsListActivity : BaseActivity(), NewsListView {
         news_list.addItemDecoration(SpacesItemDecoration(this, R.dimen.news_card_between_space))
     }
 
-    override fun showProgressBar() {
-        progress_bar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgressBar() {
-        progress_bar.visibility = View.GONE
+    override fun changeProgressBarVisibility(isProgressBarVisible: Boolean) = when {
+        isProgressBarVisible -> progress_bar.visibility = View.VISIBLE
+        else -> progress_bar.visibility = View.GONE
     }
 
 }
