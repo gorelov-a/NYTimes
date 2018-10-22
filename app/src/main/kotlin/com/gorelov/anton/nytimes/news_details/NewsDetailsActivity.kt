@@ -14,6 +14,7 @@ import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.model.NewsItemId
 import com.gorelov.anton.nytimes.news_details.vm.NewsDetailsItemVM
 import kotlinx.android.synthetic.main.activity_news_details.*
+import toothpick.Scope
 
 
 class NewsDetailsActivity : BaseActivity(), NewsDetailsView {
@@ -27,7 +28,7 @@ class NewsDetailsActivity : BaseActivity(), NewsDetailsView {
         }
     }
 
-    private val scope by lazy { DI.openNewsDetailsScope(NewsItemId(intent.getIntExtra(BUNDLE_KEY_NEWS_ID, -1))) }
+    private lateinit var scope: Scope
 
     @InjectPresenter
     lateinit var newsDetailsPresenter: NewsDetailsPresenter
@@ -36,6 +37,8 @@ class NewsDetailsActivity : BaseActivity(), NewsDetailsView {
     fun provideDetailsPresenter(): NewsDetailsPresenter = scope.getInstance(NewsDetailsPresenter::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        scope = DI.openNewsDetailsScope(NewsItemId(intent.getIntExtra(BUNDLE_KEY_NEWS_ID, -1)), savedInstanceState == null)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_details)
 

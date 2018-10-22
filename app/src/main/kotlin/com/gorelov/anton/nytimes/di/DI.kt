@@ -38,8 +38,12 @@ object DI {
 
     fun closeNewsListScope() = Toothpick.closeScope(NEWS_LIST_SCOPE)
 
-    fun openNewsDetailsScope(newsId: NewsItemId): Scope = Toothpick.openScopes(APP_SCOPE, NEWS_DETAILS_SCOPE).apply {
-        installModules(NewsDetailsModule(newsId))
+    fun openNewsDetailsScope(newsId: NewsItemId, needInstallModules: Boolean): Scope {
+        return Toothpick.openScopes(APP_SCOPE, NEWS_DETAILS_SCOPE).apply {
+            when {
+                needInstallModules -> installModules(NewsDetailsModule(newsId))
+            }
+        }
     }
 
     fun closeNewsDetailsScope() = Toothpick.closeScope(NEWS_DETAILS_SCOPE)
