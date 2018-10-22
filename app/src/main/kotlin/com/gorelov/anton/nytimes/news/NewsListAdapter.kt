@@ -46,11 +46,25 @@ class NewsListAdapter(context: Context, private val news: List<NewsListItemVM>, 
         }
 
         fun bind(newsItem: NewsListItemVM) {
-            imageLoader.load(newsItem.imageUrl).into(headingImage)
-            category.text = newsItem.category
-            title.text = newsItem.title
-            previewText.text = newsItem.previewText
-            date.text = newsItem.publishDate
+            if (newsItem.imageUrl == null) {
+                headingImage.visibility = View.GONE
+            } else {
+                headingImage.visibility = View.VISIBLE
+                imageLoader.load(newsItem.imageUrl).into(headingImage)
+            }
+            bindTextView(category, newsItem.category)
+            bindTextView(title, newsItem.title)
+            bindTextView(previewText, newsItem.previewText)
+            bindTextView(date, newsItem.publishDate.toString())
+        }
+
+        private fun bindTextView(textView: TextView, text: String?) {
+            if (text.isNullOrBlank()) {
+                textView.visibility = View.GONE
+            } else {
+                textView.text = text
+                textView.visibility = View.VISIBLE
+            }
         }
     }
 }

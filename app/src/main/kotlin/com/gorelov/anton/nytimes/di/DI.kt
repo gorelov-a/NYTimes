@@ -26,7 +26,7 @@ object DI {
         }
 
         Toothpick.openScopes(APP_SCOPE).apply {
-            installModules(AppModule(applicationContext))
+            installModules(AppModule(applicationContext), NetworkModule())
         }
     }
 
