@@ -11,8 +11,4 @@ interface NewsListView : BaseView {
     fun showNews(news: List<NewsListItemVM>)
 
     fun setRefreshing(isRefreshing: Boolean)
-
-    fun setCategoryListDialogVisibility(visibility: Boolean)
-
-    fun setCategory(category: String)
 }

@@ -18,6 +18,7 @@ class NewsListPresenter @Inject constructor(
 ) : BasePresenter<NewsListView>() {
 
     private lateinit var categories: Array<String>
+    private var currentCategoryIndex = 0
 
     override fun onFirstViewAttach() {
         viewState.setRefreshing(true)
@@ -26,8 +27,7 @@ class NewsListPresenter @Inject constructor(
                         .getNewsCategories()
                         .flatMap {
                             categories = it
-                            viewState.setCategory(categories[0])
-                            Observable.fromArray(categories[0])
+                            Observable.fromArray(categories[currentCategoryIndex])
                         }
                         .flatMap { newsListInteractor.getNewsList(it) }
                         .map { NewsListItemConverter.from(it, dateFormatter) }
@@ -42,17 +42,22 @@ class NewsListPresenter @Inject constructor(
                         }))
     }
 
-    fun onRefresh() = onFirstViewAttach()
-
-    fun onCategoryClick() {
-        viewState.setCategoryListDialogVisibility(true)
-    }
+    fun onRefresh() = getNewsByCategoryIndex(currentCategoryIndex)
 
     fun onCategoryItemClick(position: Int) {
         viewState.setRefreshing(true)
-        viewState.setCategoryListDialogVisibility(false)
+        currentCategoryIndex = position
+        getNewsByCategoryIndex(currentCategoryIndex)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        DI.closeNewsListScope()
+    }
+
+    private fun getNewsByCategoryIndex(categoryIndex: Int) {
         disposable.add(
-                newsListInteractor.getNewsList(categories[position])
+                newsListInteractor.getNewsList(categories[categoryIndex])
                         .map { NewsListItemConverter.from(it, dateFormatter) }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -63,10 +68,5 @@ class NewsListPresenter @Inject constructor(
                             viewState.setRefreshing(false)
                             viewState.showToast(R.string.load_news_error)
                         }))
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        DI.closeNewsListScope()
     }
 }

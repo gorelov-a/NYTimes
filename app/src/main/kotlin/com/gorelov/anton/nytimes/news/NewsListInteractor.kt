@@ -17,6 +17,6 @@ class NewsListInteractor @Inject constructor(
 
     fun getNewsCategories(): Observable<Array<String>> = Observable.fromArray(resourcesProvider.getStringArray(R.array.categories))
 
-    fun getNewsList(category: String): Observable<List<NewsItem>> = newsEndpoint.getNews(category)
+    fun getNewsList(category: String): Observable<List<NewsItem>> = newsEndpoint.getNews(category.toLowerCase())
             .map { NewsItemDtoConverter.from(it.results, dateFormatter) }
 }

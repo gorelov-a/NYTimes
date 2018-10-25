@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/spinner"
+        android:title=""
+        app:actionViewClass="android.widget.Spinner"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_open_about"
         android:title="@string/menu_about_author_item"
         app:showAsAction="ifRoom" />
