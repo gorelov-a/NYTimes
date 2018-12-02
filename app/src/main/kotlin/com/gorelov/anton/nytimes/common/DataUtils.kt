@@ -3,13 +3,17 @@ package com.gorelov.anton.nytimes.common
 import com.gorelov.anton.nytimes.model.Category
 import com.gorelov.anton.nytimes.model.NewsItem
 import com.gorelov.anton.nytimes.model.NewsItemId
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
 class DataUtils @Inject constructor() {
 
-    fun generateNews(): List<NewsItem> {
+    fun generateNews(): Observable<ArrayList<NewsItem>> {
         val darwinAwards = Category(1, "Darwin Awards")
         val criminal = Category(2, "Criminal")
         val animals = Category(3, "Animals")
@@ -134,16 +138,14 @@ class DataUtils @Inject constructor() {
                         + "were Goodnight Girl and Love Is All Around.\"")
         ))
 
-        return news
+        return Observable.fromArray(news).subscribeOn(Schedulers.io()).delay(2, TimeUnit.SECONDS)
     }
 
-    fun getNewsItemById(id: NewsItemId): NewsItem? {
-        val news = generateNews()
-        for (curItem in news) {
-            if (curItem.id == id)
-                return curItem
-        }
-        return null
+    fun getNewsItemById(id: NewsItemId): Single<NewsItem> {
+        return generateNews()
+                .flatMapIterable { it }
+                .filter { it.id == id }
+                .firstOrError()
     }
 
     private fun createDate(year: Int, month: Int, date: Int, hrs: Int, min: Int): Date = GregorianCalendar(year, month - 1, date, hrs, min).time

@@ -7,11 +7,12 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.arellomobile.mvp.MvpAppCompatActivity
+import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.about.AboutActivity
+import com.gorelov.anton.nytimes.common.BaseActivity
 import com.gorelov.anton.nytimes.common.SpacesItemDecoration
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.news.vm.NewsListItemVM
@@ -19,7 +20,7 @@ import com.gorelov.anton.nytimes.news_details.NewsDetailsActivity
 import kotlinx.android.synthetic.main.activity_news_list.*
 
 
-class NewsListActivity : MvpAppCompatActivity(), NewsListView {
+class NewsListActivity : BaseActivity(), NewsListView {
 
     private val scope by lazy { DI.openNewsListScope() }
 
@@ -58,6 +59,11 @@ class NewsListActivity : MvpAppCompatActivity(), NewsListView {
             else -> news_list.layoutManager = GridLayoutManager(this, NewsListConsts.landscapeNewsColumnsCount)
         }
         news_list.addItemDecoration(SpacesItemDecoration(this, R.dimen.news_card_between_space))
+    }
+
+    override fun changeProgressBarVisibility(isProgressBarVisible: Boolean) = when {
+        isProgressBarVisible -> progress_bar.visibility = View.VISIBLE
+        else -> progress_bar.visibility = View.GONE
     }
 
 }

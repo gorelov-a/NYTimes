@@ -1,15 +1,15 @@
 package com.gorelov.anton.nytimes.about
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.gorelov.anton.nytimes.R
+import com.gorelov.anton.nytimes.common.BasePresenter
 import com.gorelov.anton.nytimes.common.ResourcesProvider
 import com.gorelov.anton.nytimes.di.DI
 import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
-class AboutPresenter @Inject constructor(private val resourcesProvider: ResourcesProvider) : MvpPresenter<AboutView>() {
+class AboutPresenter @Inject constructor(private val resourcesProvider: ResourcesProvider) : BasePresenter<AboutView>() {
 
     fun onTelegramButtonClick() = viewState.openTelegramChat()
 

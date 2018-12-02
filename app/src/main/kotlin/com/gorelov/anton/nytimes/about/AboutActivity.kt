@@ -3,17 +3,15 @@ package com.gorelov.anton.nytimes.about
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.gorelov.anton.nytimes.R
+import com.gorelov.anton.nytimes.common.BaseActivity
 import com.gorelov.anton.nytimes.di.DI
 import kotlinx.android.synthetic.main.activity_about.*
 
 
-class AboutActivity : MvpAppCompatActivity(), AboutView {
+class AboutActivity : BaseActivity(), AboutView {
 
 
     private val scope by lazy { DI.openAboutScope() }
@@ -56,8 +54,6 @@ class AboutActivity : MvpAppCompatActivity(), AboutView {
     override fun setDisclaimer(text: String) {
         disclaimer.text = text
     }
-
-    override fun showToast(@StringRes stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_LONG).show()
 
     private fun openUri(uri: String) {
         with(Intent(Intent.ACTION_VIEW, Uri.parse(uri))) {

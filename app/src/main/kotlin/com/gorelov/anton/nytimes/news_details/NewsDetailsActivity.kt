@@ -2,21 +2,22 @@ package com.gorelov.anton.nytimes.news_details
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.widget.Toast
+import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gorelov.anton.nytimes.R
+import com.gorelov.anton.nytimes.common.BaseActivity
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.model.NewsItemId
 import com.gorelov.anton.nytimes.news_details.vm.NewsDetailsItemVM
 import kotlinx.android.synthetic.main.activity_news_details.*
+import toothpick.Scope
 
 
-class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
+class NewsDetailsActivity : BaseActivity(), NewsDetailsView {
 
     companion object {
         private val BUNDLE_KEY_NEWS_ID = "newsId"
@@ -27,7 +28,7 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
         }
     }
 
-    private val scope by lazy { DI.openNewsDetailsScope(NewsItemId(intent.getIntExtra(BUNDLE_KEY_NEWS_ID, -1))) }
+    private lateinit var scope: Scope
 
     @InjectPresenter
     lateinit var newsDetailsPresenter: NewsDetailsPresenter
@@ -36,6 +37,8 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
     fun provideDetailsPresenter(): NewsDetailsPresenter = scope.getInstance(NewsDetailsPresenter::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        scope = DI.openNewsDetailsScope(NewsItemId(intent.getIntExtra(BUNDLE_KEY_NEWS_ID, -1)), savedInstanceState == null)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_details)
 
@@ -62,5 +65,11 @@ class NewsDetailsActivity : MvpAppCompatActivity(), NewsDetailsView {
         }
     }
 
-    override fun showToast(@StringRes stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_LONG).show()
+    override fun showProgressBar() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progress_bar.visibility = View.GONE
+    }
 }
