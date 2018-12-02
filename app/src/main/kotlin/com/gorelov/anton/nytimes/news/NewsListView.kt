@@ -10,6 +10,5 @@ interface NewsListView : BaseView {
 
     fun showNews(news: List<NewsListItemVM>)
 
-    fun changeProgressBarVisibility(isProgressBarVisible: Boolean)
-
+    fun setRefreshing(isRefreshing: Boolean)
 }
