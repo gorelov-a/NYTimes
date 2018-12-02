@@ -10,7 +10,6 @@ import com.gorelov.anton.nytimes.R
 import com.gorelov.anton.nytimes.common.BaseActivity
 import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.model.NewsItemId
-import kotlinx.android.synthetic.main.activity_news_details.*
 import toothpick.Scope
 
 
@@ -35,7 +34,7 @@ class NewsDetailsActivity : BaseActivity(), NewsDetailsView {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
-        scope = DI.openNewsDetailsScope(NewsItemId(intent.getStringExtra(BUNDLE_KEY_NEWS_ID)), savedInstanceState == null)
+        scope = DI.openNewsDetailsScope(NewsItemId(intent.getStringExtra(BUNDLE_KEY_NEWS_ID)))
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_details)

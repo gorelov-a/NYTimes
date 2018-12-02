@@ -8,7 +8,6 @@ import com.gorelov.anton.nytimes.di.DI
 import com.gorelov.anton.nytimes.news.vm.NewsListItemConverter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @InjectViewState
@@ -31,7 +30,6 @@ class NewsListPresenter @Inject constructor(
                         }
                         .flatMap { newsListInteractor.getNewsList(it) }
                         .map { NewsListItemConverter.from(it, dateFormatter) }
-                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             viewState.setRefreshing(false)
@@ -59,7 +57,6 @@ class NewsListPresenter @Inject constructor(
         disposable.add(
                 newsListInteractor.getNewsList(categories[categoryIndex])
                         .map { NewsListItemConverter.from(it, dateFormatter) }
-                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             viewState.setRefreshing(false)

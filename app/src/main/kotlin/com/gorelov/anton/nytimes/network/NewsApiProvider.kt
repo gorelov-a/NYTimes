@@ -1,6 +1,8 @@
 package com.gorelov.anton.nytimes.network
 
+import com.gorelov.anton.nytimes.BuildConfig
 import com.gorelov.anton.nytimes.network.interceptor.ApiKeyInterceptor
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,17 +22,20 @@ class NewsApiProvider @Inject constructor() : Provider<NewsEndpoint> {
     }
 
     private fun buildOkHttpClient(): OkHttpClient {
-        val networkLogInterceptor = HttpLoggingInterceptor()
-        networkLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-
-        return OkHttpClient.Builder()
+        val okHttpClienBuilder = OkHttpClient.Builder()
                 .addInterceptor(ApiKeyInterceptor(NetworkConsts.apiKey))
-                .addInterceptor(networkLogInterceptor)
                 .connectTimeout(NetworkConsts.timeoutInSeconds, TimeUnit.SECONDS)
                 .writeTimeout(NetworkConsts.timeoutInSeconds, TimeUnit.SECONDS)
                 .readTimeout(NetworkConsts.timeoutInSeconds, TimeUnit.SECONDS)
-                .build()
+
+        if (BuildConfig.DEBUG) {
+            okHttpClienBuilder.addInterceptor(
+                    HttpLoggingInterceptor()
+                            .apply { level = HttpLoggingInterceptor.Level.BODY })
+        }
+
+        return okHttpClienBuilder.build()
     }
 
     private fun buildRetrofitClient(client: OkHttpClient): Retrofit {
@@ -38,7 +43,7 @@ class NewsApiProvider @Inject constructor() : Provider<NewsEndpoint> {
                 .baseUrl(NetworkConsts.baseUrl)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
     }
 }

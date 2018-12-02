@@ -16,6 +16,8 @@ object DI {
     private const val NEWS_LIST_SCOPE = "news_list_scope"
     private const val NEWS_DETAILS_SCOPE = "news_details_scope"
 
+    private val openScopes: MutableCollection<String> = HashSet()
+
     fun init(applicationContext: Context) {
         if (BuildConfig.DEBUG) {
             Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
@@ -38,13 +40,19 @@ object DI {
 
     fun closeNewsListScope() = Toothpick.closeScope(NEWS_LIST_SCOPE)
 
-    fun openNewsDetailsScope(newsId: NewsItemId, needInstallModules: Boolean): Scope {
+    fun openNewsDetailsScope(newsId: NewsItemId): Scope {
         return Toothpick.openScopes(APP_SCOPE, NEWS_DETAILS_SCOPE).apply {
             when {
-                needInstallModules -> installModules(NewsDetailsModule(newsId))
+                !openScopes.contains(NEWS_DETAILS_SCOPE) -> {
+                    openScopes.add(NEWS_DETAILS_SCOPE)
+                    installModules(NewsDetailsModule(newsId))
+                }
             }
         }
     }
 
-    fun closeNewsDetailsScope() = Toothpick.closeScope(NEWS_DETAILS_SCOPE)
+    fun closeNewsDetailsScope() = {
+        openScopes.remove(NEWS_DETAILS_SCOPE)
+        Toothpick.closeScope(NEWS_DETAILS_SCOPE)
+    }
 }
